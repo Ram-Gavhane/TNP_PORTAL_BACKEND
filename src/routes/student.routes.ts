@@ -60,7 +60,21 @@ import {
 import { downloadResume } from "../controllers/studentControllers/resume.controller.js";
 //Eligibility Controller
 import { getEligibilityCriteria } from "../controllers/studentControllers/eligibility.controller.js";
-import { getPublicProfile, searchStudents, getSuggestedProfiles } from "../controllers/studentControllers/publicprofile.controller.js";
+import {
+  getPublicProfile,
+  getSuggestedProfiles,
+  searchStudents,
+} from "../controllers/studentControllers/publicprofile.controller.js";
+//Interview Experience Controller
+import {
+  createInterviewExperience,
+  getInterviewExperiences,
+  getInterviewExperienceById,
+  updateInterviewExperience,
+  deleteInterviewExperience,
+} from "../controllers/studentControllers/interviewExperience.controller.js";
+
+import { getStudentNotifications } from "../controllers/studentControllers/notification.controller.js";
 
 const studentRouter = express.Router();
 studentRouter.use(express.json());
@@ -124,8 +138,18 @@ studentRouter.get("/getEligibilityCriteria/:jobPostId", getEligibilityCriteria);
 //RESUME DOWNLOAD ROUTE
 studentRouter.get("/download-resume", downloadResume);
 
+//Profile Routes
 studentRouter.get("/search", searchStudents);
 studentRouter.get("/publicProfile/:userId", getPublicProfile);
 studentRouter.get("/suggested-profiles", getSuggestedProfiles);
+
+//Interview Experience Routes
+studentRouter.post("/interview-experience", createInterviewExperience);
+studentRouter.get("/interview-experiences", getInterviewExperiences);
+studentRouter.get("/interview-experience/:id", getInterviewExperienceById);
+studentRouter.put("/interview-experience/:id", updateInterviewExperience);
+studentRouter.delete("/interview-experience/:id", deleteInterviewExperience);
+
+studentRouter.get("/notifications", getStudentNotifications);
 
 export default studentRouter;
