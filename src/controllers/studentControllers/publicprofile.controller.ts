@@ -73,3 +73,32 @@ export const getPublicProfile = async (req: Request, res: Response) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 };
+
+export const getSuggestedProfiles = async (_req: Request, res: Response) => {
+    try {
+        const students: any[] = await db.$queryRaw`
+            SELECT 
+                sp.id, 
+                sp."userId", 
+                sp."firstName", 
+                sp."lastName", 
+                e.branch
+            FROM "StudentProfile" sp
+            LEFT JOIN "Education" e ON sp.id = e."studentId"
+            ORDER BY RANDOM()
+            LIMIT 5
+        `;
+
+        const formattedStudents = students.map(s => ({
+            id: s.id,
+            userId: s.userId,
+            name: `${s.firstName} ${s.lastName}`,
+            branch: s.branch || "N/A"
+        }));
+
+        return res.status(200).json({ students: formattedStudents });
+    } catch (error) {
+        console.error("Error getting suggested profiles:", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+};

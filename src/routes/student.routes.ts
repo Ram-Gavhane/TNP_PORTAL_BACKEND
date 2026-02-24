@@ -62,6 +62,7 @@ import { downloadResume } from "../controllers/studentControllers/resume.control
 import { getEligibilityCriteria } from "../controllers/studentControllers/eligibility.controller.js";
 import {
   getPublicProfile,
+  getSuggestedProfiles,
   searchStudents,
 } from "../controllers/studentControllers/publicprofile.controller.js";
 //Interview Experience Controller
@@ -140,6 +141,7 @@ studentRouter.get("/download-resume", downloadResume);
 //Profile Routes
 studentRouter.get("/search", searchStudents);
 studentRouter.get("/publicProfile/:userId", getPublicProfile);
+studentRouter.get("/suggested-profiles", getSuggestedProfiles);
 
 //Interview Experience Routes
 studentRouter.post("/interview-experience", createInterviewExperience);
