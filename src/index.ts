@@ -15,6 +15,7 @@ const app = express();
 // ---------------- CORS (Using the package!) ----------------
 const allowedOrigins = [
   "https://tnp-frontend-gold.vercel.app",
+  "https://tnpportalbackend-production.up.railway.app",
   "http://localhost:3000",
   "http://localhost:3001",
 ];
